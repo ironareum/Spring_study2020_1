@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 생성자를 통한 주입 -->                     
+	<bean id="xml1" class="kr.co.softsoldesk.beans.TestBean1" lazy-init="true">
+		<constructor-arg type="int" value="100" index="0"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="Hello" index="1"></constructor-arg>
+		<constructor-arg ref="data_bean1"></constructor-arg>
+	</bean>
+	<bean id="data_bean1" class="kr.co.softsoldesk.beans.DataBean1"/>
+    
+    <!-- setter를 통한 주입 -->
+    <bean id="xml2" class="kr.co.softsoldesk.beans.TestBean1" lazy-init="true">
+    	<property name="data1" value="300"></property>
+    	<property name="data2" value="Hello2"></property>
+    	<property name="data3" ref="data_bean1"></property>
+    </bean>
+
+    <!-- autowire='byName'를 통한 주입 -->
+    <bean id="xml3" class="kr.co.softsoldesk.beans.TestBean2" lazy-init="true" autowire="byName"/>
+    <bean id="data1" class="kr.co.softsoldesk.beans.DataBean2"/>
+    <bean id="data2" class="kr.co.softsoldesk.beans.DataBean2"/>
+
+    <!-- autowire='byType'를 통한 주입 -->
+    <bean id="xml4" class="kr.co.softsoldesk.beans.TestBean3" lazy-init="true" autowire="byName"/>
+    <bean id="data3" class="kr.co.softsoldesk.beans.DataBean3"/>
+    <bean id="data4" class="kr.co.softsoldesk.beans.DataBean3"/>
+    
+                         
+</beans>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- arg의 우선순위 : String > double(float) > decimal 순으로 됨. (스트링이 오면 나머지도 스트링으로 바껴버림) 
+그래서 타입 정의를 꼭 해주는것이 중요함. String은 타입정의 해주지 않아도 됨. 왜냐 우선순위가 젤 높으니까  -->
+	<bean id="obj1" class="kr.co.softsoldesk.beans.TestBean" lazy-init="true"/>
+	<bean id="obj2" class="kr.co.softsoldesk.beans.TestBean" lazy-init="true">
+		<constructor-arg type ="int" value="100"/>
+	</bean>
+
+	<bean id="obj3" class="kr.co.softsoldesk.beans.TestBean" lazy-init="true">
+		<constructor-arg type ="double" value="11.11"/>
+	</bean>
+
+	<bean id="obj4" class="kr.co.softsoldesk.beans.TestBean" lazy-init="true">
+		<constructor-arg value="Hello"/>
+	</bean>
+
+	<bean id="obj5" class="kr.co.softsoldesk.beans.TestBean" lazy-init="true">
+		<constructor-arg type ="int" value="500"/>
+		<constructor-arg type ="double" value="22.22"/>
+		<constructor-arg type ="java.lang.String" value="Test"/>
+	</bean>
+	
+	<!-- 매개변수 순서를 뒤죽박죽으로 정의하면 인덱스 번호를 명시해서 알아서 찾아가게 함. 인덱스 사용 안해도 알아서 잘 찾아가지만...인덱스 해주는게 좋음.  -->
+	<bean id="obj6" class="kr.co.softsoldesk.beans.TestBean" lazy-init="true">
+		<constructor-arg type ="java.lang.String" value="Test뒤죽박죽"	index="2"/>
+		<constructor-arg type ="double" value="88.88" index="1"/>
+		<constructor-arg type ="int" value="800" index="0"/>
+	</bean>
+
+<!-- 방법 1 -->
+	<bean id="obj7" class="kr.co.softsoldesk.beans.TestBean2" lazy-init="true">
+		<constructor-arg>
+			<bean class="kr.co.softsoldesk.beans.DataBean"/>		
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="kr.co.softsoldesk.beans.DataBean"/>		
+		</constructor-arg>
+	</bean>
+<!-- 방법 2 -->
+	<!-- 이미 선언이 되어있음 (DataBean???) -->
+	<bean class="kr.co.softsoldesk.beans.DataBean" id="data_bean" scope="prototype"/>		
+	<bean id="obj8" class="kr.co.softsoldesk.beans.TestBean2" lazy-init="true">
+		<constructor-arg ref="data_bean"/> <!-- 객체를 참조할때는 value 아니고 ref로 씀  -->
+		<constructor-arg ref="data_bean"/>
+	</bean>
+
+<!-- ================================== -->
+	<bean id="SonySpeaker" class="kr.co.softsoldesk.beans.SonySpeaker"/>
+	<bean id="samsungTV" class="kr.co.softsoldesk.beans.SamsungTV" lazy-init="true">
+		<constructor-arg ref="SonySpeaker"/>
+		<constructor-arg type ="int" value="2500000" index="1"/>
+	</bean>
+
+
+                         
+</beans>

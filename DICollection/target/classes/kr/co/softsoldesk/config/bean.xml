@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+                         
+	<bean id="t1" class="kr.co.softsoldesk.beans.TestBean">
+		<!-- 프로퍼티 타입이 List이므로 list로 만듬  -->
+		<!-- 제네릭이 String 인 경우 . name=TestBean 객체의 프로퍼티 명  -->
+		<property name="list1" >
+			<list>
+				<value>문자열1</value>
+				<value>문자열2</value>
+				<value>문자열3</value>
+			</list>
+		</property>
+		<!-- 제네릭이 int 인 경우 . name=TestBean 객체의 프로퍼티 명  -->
+		<property  name="list2" >
+			<list>
+				<value>100</value>
+				<value>200</value>
+				<value>300</value>
+			</list>
+		</property>
+		<!-- 제네릭이 객체(DataBean) 인 경우 . name=TestBean 객체의 프로퍼티 명  -->
+		<property  name="list3" >
+			<list>
+				<!-- 요기서 생성한 객체는 생성시 마다 해쉬값 다르게 나옴 (싱글톤 아님)  -->
+				<bean class="kr.co.softsoldesk.beans.DataBean"/>
+				<bean class="kr.co.softsoldesk.beans.DataBean"/>
+				<!-- 기존에 선언된 객체로 사용하기. 아래 DataBean 참조 -->
+				<ref bean="DataBean"/>
+				<ref bean="DataBean"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- DataBean 객체 따로 생성해놓고 사용하기. 스코프 프로토타입으로 싱글톤 없앰.  -->
+	<bean id="DataBean" class="kr.co.softsoldesk.beans.DataBean" scope="prototype"/>
+	
+	
+	
+	<bean id="t2" class="kr.co.softsoldesk.beans.TestBean">
+		<property name="set1">
+			<set>
+				<value>문자열1</value>
+				<value>문자열2</value>
+				<value>문자열3</value>
+				<value>문자열3</value>
+				<value>문자열3</value>
+			</set>
+		</property>
+		<property name="set2">
+			<set>
+				<value>100</value>
+				<value>200</value>
+				<value>300</value>
+				<value>300</value>
+				<value>300</value>
+			</set>
+		</property>
+		<property name="set3">
+			<set>
+				<bean class="kr.co.softsoldesk.beans.DataBean"/>
+				<bean class="kr.co.softsoldesk.beans.DataBean"/>
+				<!--  기존에 선언된 객체 set은 아이디가 똑같은 bean은 같은 주소로 반환 ( 즉 중복을 허용하지 않음) -->
+				<ref bean="DataBean"/>
+				<ref bean="DataBean"/>
+			</set>
+		</property>
+		
+		<!-- Map -->
+		<property name="map1">
+			<map>
+				<entry key="a1" value="문자열1"/>
+				<entry key="a2" value="100" value-type="int"/>
+				<entry key="a3">
+					<bean class="kr.co.softsoldesk.beans.DataBean"/>
+				</entry>
+				
+				<!-- 이미 선언된 객체 사용시  -->
+				<entry key="a4" value-ref="DataBean"/>
+				
+				<!-- 리스트  -->
+				<entry key="a5">
+					<list>
+						<value>문자열1 </value>
+						<value>문자열2 </value>
+						<value>문자열3 </value>
+					</list>
+				</entry>
+			</map>
+		</property>
+		
+		<!-- properties : key를 줌. <prop></prop>사이에 넣어주는 내용이 값.(=벨류) -->
+		<property name="prop1">
+			<props>
+				<prop key="p1">문자열1 </prop>
+				<prop key="p2">문자열2 </prop>
+				<prop key="p3">문자열3 </prop>
+			</props>
+		</property>
+		
+	</bean>
+	
+	<bean id="addr" class="kr.co.softsoldesk.beans.CollectionBean">
+		<property name="addressList">
+			<list>
+				<value>서울시 강남구 역삼동 </value>
+				<value>서울시 강남구 행당동 </value>
+			</list>
+		</property>
+	</bean>
+	
+                         
+</beans>
