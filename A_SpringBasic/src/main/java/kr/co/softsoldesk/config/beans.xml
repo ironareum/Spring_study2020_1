@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- HelloWorldEn hello =new HelloWorldEn;      -->
+	<!-- 프레임 껴놓고 알아서 찾아가게 하기. 그러면 알아서 객체선언 함 (위의 객체생성과 동일한거) -->
+	<bean id="hello" class="kr.co.softsoldesk.beans.HelloWorldEn" />  
+	<bean id="hello2" class="kr.co.softsoldesk.beans.HelloWorldKo" />  
+
+	<bean id="tv1" class="kr.co.softsoldesk.beans.SamsungTV" />  
+	<bean id="tv2" class="kr.co.softsoldesk.beans.SoldeskTV" />  
+	              
+</beans>

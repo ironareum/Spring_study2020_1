@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd
+                         http://www.springframework.org/schema/context
+                         http://www.springframework.org/schema/context/spring-context.xsd
+                         http://www.springframework.org/schema/aop
+                         http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<bean id="xml1" class="kr.co.softsoldesk.beans.TestBean"/>
+	<bean id="advisor1" class="kr.co.softsoldesk.advisor.AdvisorClass"/>
+	
+	<!-- aop 환경설정  -->
+	<aop:config>
+		<!-- aspect 관점. ref=""포인트 관심 지정.   -->
+		<aop:aspect ref="advisor1">
+			<!--  pointcut :포인트 끊어주기. 기준이 될 포인트  -->
+			<aop:pointcut expression="execution(* method1())" id="point1"/> <!-- 애가 작동만 하면, 앞뒤로 뭘 넣어줌...? -->
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> <!-- ex) 결제시 인증코드. 등 공통모듈을 넣어서 사용  -->
+			<aop:after method="afterMethod" pointcut-ref="point1"/>
+			<aop:around method="aroundMethod" pointcut-ref="point1"/>
+			<aop:after-returning method="afterReturningMethod" pointcut-ref="point1"/>
+			<aop:after-throwing method="afterThrowingMethod" pointcut-ref="point1" throwing="e1"/>
+		</aop:aspect>
+	</aop:config>
+                        
+                         
+</beans>

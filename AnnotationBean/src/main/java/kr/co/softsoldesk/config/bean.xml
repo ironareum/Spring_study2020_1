@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd
+                         http://www.springframework.org/schema/context
+                         http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Bean에 설정되어 있는 어노테이션을 이용 -->
+	<!-- 요거 넣어주면 어노테이션 찍힌거 자동으로 불러와서 인식함. -->
+	<context:annotation-config/>
+
+	<bean id="xml1" class="kr.co.softsoldesk.beans.TestBean1">
+		<property name="data1" value="500"/>
+	</bean>
+	<bean class="kr.co.softsoldesk.beans.DataBean1"/>
+	<bean id="obj4" class="kr.co.softsoldesk.beans.DataBean2"/>
+	<bean id="obj5" class="kr.co.softsoldesk.beans.DataBean2"/>
+	
+	<!-- @Qualifier("obj4") 안주면 원래이름으로 찾아옴. -->
+<!-- 	<bean id="data4" class="kr.co.softsoldesk.beans.DataBean2"/>
+	<bean id="data5" class="kr.co.softsoldesk.beans.DataBean2"/> -->
+	
+	
+	<!-- obj6가 없으면 안찾아옴. 왜냐 reqired=false 해줬기때문에.  -->                         
+    
+<!-- ==================== -->
+    <bean id="xml2" class="kr.co.softsoldesk.beans.TestBean2"/>
+    <bean class="kr.co.softsoldesk.beans.DataBean3"/>
+	<bean class="kr.co.softsoldesk.beans.DataBean4"/>
+    
+                         
+</beans>
