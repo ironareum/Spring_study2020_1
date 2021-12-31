@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd
+                         http://www.springframework.org/schema/context
+                         http://www.springframework.org/schema/context/spring-context.xsd
+                         http://www.springframework.org/schema/aop
+                         http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="xml1" class="kr.co.softsoldesk.beans.TestBean1"/>	
+	<bean id="xml2" class="kr.co.softsoldesk.beans.TestBean2"/>	
+	<bean id="xml3" class="kr.co.softsoldesk.beans2.TestBean1"/>	
+	<bean id="advisor1" class="kr.co.softsoldesk.advisor.AdvisorClass"/>
+	
+	<aop:config>
+	<aop:aspect ref="advisor1">				
+			<!--  * ==(타입,패키지,클래스)어디든 이 메소드명이 있는거! == void kr.co.softsoldesk.beans.TestBean1 와 동일. -->
+			
+			<!-- 반환타입이 void, 패키지가 kr.co.softsoldesk.beans, 클래스가 TestBean1에 존재하는 method1() -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1())" id="point1"/>
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+			
+			<!-- 매개변수 문자열 int -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1(int))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+
+			<!-- 매개변수 문자열 String -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1(String))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/>  -->
+			
+			<!-- 모든 타입 * -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1(*))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+			
+			<!-- int 형 2개  -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1(int,int))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+			
+			<!-- int, String 형 2개  -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1(int,String))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+			
+			<!-- 모든타입 형 2개. 상황에 따라 (int, *) 뭐 이렇게도 쓸 수 있음  -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1(*,*))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/>	 -->
+			
+			<!-- 매개변수 갯수 0개이상 : .. 다 포함됨   -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.method1(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/>	 -->
+			
+			<!-- 클래스에 존재하는 모든 메소드    -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.TestBean1.*(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->	
+			
+			<!-- 반환타입이 void, kr.co.softsoldesk.beans 패키지의 모든 클래스, method1 메서드(매개변수 무관) -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.*.method1(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+
+			<!-- 반환타입이 void, kr.co.softsoldesk.beans 모든 패키지의 모든 클래스 ) -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.beans.*.*(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+
+			<!-- 반환타입이 void, kr.co.softsoldesk.의 모든 패키지의 모든 클래스 ) -->
+			<!-- <aop:pointcut expression="execution(void kr.co.softsoldesk.*.*.*(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+			
+			<!-- 반환타입이 void, 모든 패키지의 모든 클래스, 모든 메서드 ) -->
+			<!-- <aop:pointcut expression="execution(void *.*(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+		
+			<!-- 반환타입이 int, 모든 패키지의 모든 클래스, 모든 메서드 ) -->
+			<!-- <aop:pointcut expression="execution(int *.*(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/> -->
+		
+			<!-- 모든 반환타입, 모든 패키지의 모든 클래스, 모든 메서드 ) -->
+			<aop:pointcut expression="execution(* *.*(..))" id="point1" />
+			<aop:before method="beforeMethod" pointcut-ref="point1"/>
+		
+			
+			
+		</aop:aspect>
+	</aop:config>	
+                        
+                         
+</beans>

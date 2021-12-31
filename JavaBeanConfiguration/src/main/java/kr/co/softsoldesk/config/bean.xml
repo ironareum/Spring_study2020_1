@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+                         
+<!-- 	<bean class="kr.co.softsoldesk.beans.TestBean1"/>   -->                       
+	<bean id="xml1" class="kr.co.softsoldesk.beans.TestBean1" />                         
+	
+	<bean id="xml2" class="kr.co.softsoldesk.beans.TestBean2" lazy-init="true" />                         
+	
+	<bean id="xml3" class="kr.co.softsoldesk.beans.TestBean3" scope="prototype" />  <!-- scope 쓰면 자동생성도 막아줌  -->                       
+	
+	<bean class="kr.co.softsoldesk.beans.TestBean4" />                        
+	<!-- 같은객체 두개 작성하면 안됨. id값을 따로 주던지 해야됨..
+		하지만! primary를 주면 됨  -->                     
+	<bean class="kr.co.softsoldesk.beans.TestBean4" primary="true"/>   
+                         
+</beans>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+                         
+	<bean id="t1" class="kr.co.softsoldesk.beans.TestBean">
+		<property name="data1" value="100"/>
+		<property name="data2" value="11.11"/>
+		<property name="data3" value="true"/>
+		<property name="data4" value="안녕~"/>
+	<!-- property name: TestBean에 있는 필드이름, value: 필드에 값 주기  -->
+
+		<!-- 필드에 객체값 주기 (객체선언) -->
+		<property name="data5">
+			<bean class="kr.co.softsoldesk.beans.DataBean"/>
+		</property>
+		
+		<!-- 이미 선언되어 있는 빈 불러오기 (아래 id=data_bean 참조) -->
+		<property name="data6" ref="data_bean"/>
+	</bean>
+		
+		<bean id="data_bean" class="kr.co.softsoldesk.beans.DataBean"/>
+		
+<!-- ==================== -->
+	<bean id="AppleSpeaker" class="kr.co.softsoldesk.beans.AppleSpeaker"/>
+	<!-- property 메소드 사용  -->
+	<bean id="samsungTV" class="kr.co.softsoldesk.beans.SamsungTV" scope="prototype">
+		<property name="speaker" ref="AppleSpeaker"/>
+		<property name="price" value="2500000"/>
+	</bean>
+	<!-- constructor-arg 메소드 사용 --> 
+<!-- 	<bean id="samsungTV" class="kr.co.softsoldesk.beans.SamsungTV">
+		<constructor-arg ref="AppleSpeaker" index="0"/>
+		<constructor-arg type="int" value="250000" index="1"/>
+	</bean> -->
+
+
+                         
+</beans>
