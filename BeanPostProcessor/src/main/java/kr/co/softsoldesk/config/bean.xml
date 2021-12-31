@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+                         
+	<bean id="t1" class="kr.co.softsoldesk.beans.TestBean1" lazy-init="true" init-method="bean1_init"/>
+	
+
+
+	<bean id="t2" class="kr.co.softsoldesk.beans.TestBean2" lazy-init="true" init-method="bean2_init"/>
+	<!-- <bean id="t2" class="kr.co.softsoldesk.beans.TestBean2" lazy-init="true"/> -->
+
+
+	<!-- processor: 
+	-생성자와 init-method 사이에서 제어권을 뺏음(그 사이에 postProcessor에서 설정한 메소드 들어감)  
+	-main에서 생성된 객체들을 다 읽어서 프로세서 처리함.
+	-->
+	<bean class="kr.co.softsoldesk.processor.TestBeanPostProcessor"/>
+
+</beans>

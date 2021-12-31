@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- xml을 로딩할때 자동으로 생성자 호출 -->
+	<bean class="kr.co.softsoldesk.beans.TestBean"/> <!-- 아이디값을 주지않았으므로 생성자만 호출. 객체생성은 불가(=주소값 못불러옴).  -->
+	
+	<!-- id라는 속성을 통하여 getBean 메서드로 객체의 주소값을 가져올 수 있음 -->
+	<bean id="test1" class="kr.co.softsoldesk.beans.TestBean"/> <!-- 생성자 호출 & 객체생성 가능  -->
+	
+	<!-- 생성자를 자동으로 호출하지 못하게 함   -->
+	<!--  lazy-init: 디폴트값은 false. true로 바꾸면 생성자 자동 호출 안됨 -->
+	<bean id="test2" class="kr.co.softsoldesk.beans.TestBean" lazy-init="true"/> 
+
+	<!--  getBean으로 호출시 새로운 객체를 생성한다( 즉 메모리 주소가 다르게 보임) -->
+	<bean id="test3" class="kr.co.softsoldesk.beans.TestBean" scope="prototype"/> <!-- scope: 싱글톤 사용여부(디폴트값은 singleton. prototype은 싱글톤 사용안함 -->
+
+</beans>

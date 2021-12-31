@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd"
+                         default-init-method="default_init"
+                         default-destroy-method="default_destroy">
+                         <!-- default-init-method:  
+                         default-destroy-method: -->
+
+	<bean id="t1" class="kr.co.softsoldesk.beans.TestBean1" lazy-init="true"
+	init-method="bean1_init"  destroy-method="bean1_destroy"/>
+	<!-- 
+	init-method: 생성자가 호출된 후 자동으로 나타날 메소드 설정.  
+	destroy-method : close를 만나면 나타날 메소드 설정. 
+	-->      
+	
+	<!-- t2는 빈 디폴트의 init, destroy 값을 받아서 씀. -->
+	<bean id="t2" class="kr.co.softsoldesk.beans.TestBean2" lazy-init="true"/>
+	
+	<bean id="t3" class="kr.co.softsoldesk.beans.TestBean3" lazy-init="true"
+	init-method="bean3_init"  destroy-method="bean3_destroy"/>
+	                   
+	<bean id="t4" class="kr.co.softsoldesk.beans.TestBean4" lazy-init="true"/>
+	<!-- <bean id="t4" class="kr.co.softsoldesk.beans.TestBean4" lazy-init="true"
+	init-method="bean3_init"  destroy-method="bean3_destroy"/> 클라스안에 메소드가 없으니까 에러남.  -->
+</beans>

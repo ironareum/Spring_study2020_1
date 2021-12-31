@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                         http://www.springframework.org/schema/beans/spring-beans.xsd"
+                         default-autowire="byName">
+                         
+	<bean id="obj1" class="kr.co.softsoldesk.beans.TestBean1" >
+		<property name ="data1" ref="data_bean1"/>
+		<property name ="data2" ref="data_bean1"/>
+	</bean>                         
+	<bean id="data_bean1" class="kr.co.softsoldesk.beans.DataBean1" scope="prototype"/>   
+	
+	<!-- =========== autowire : ByName ============= --> 
+	<!-- 참고하고자 하는 객체를 bean으로 만든다음에  autowire="byName"으로 빈id 이름으로 가져옴. 참고로 이름은 속성명과 동일해야함  -->
+	<!-- byName을 사용할경우 위에 bean id를 property name과 같이 취급
+		 속성명이 일치해야하며 객체만 가능 (value값 설정 불가)(주소가 다름)-->
+	<bean id="obj2" class="kr.co.softsoldesk.beans.TestBean1" autowire="byName"/>
+	<!-- autowire로 가져올 bean의 id는 반드시 클래스의 속성명과 일치해야함.  -->
+	<bean id="data1" class="kr.co.softsoldesk.beans.DataBean1"/>
+	<bean id="data2" class="kr.co.softsoldesk.beans.DataBean1"/>
+	
+	<!-- =========== autowire : ByType ============= --> 
+	<bean id="obj3" class="kr.co.softsoldesk.beans.TestBean2" autowire="byType"/> 
+	<!-- 타입으로 가져올 객체는 id 안써도됨. 알아서 타입보고 찾아온다고함...신기하네..  -->
+	<!-- ByType을 사용할경우 위에 TestBean2에 빈객체마다 DataBean2을 다 넣어줌. 
+		 그래서 bean 두개 만들면 안됨. 그러면 못찾음. 여러개 쓸려면 아이디값 줘서 다르게 해야됨. 
+		 (디폴트=싱글톤) -->
+	<!-- <bean class="kr.co.softsoldesk.beans.DataBean2" scope="prototype"/> -->
+	<!-- 아이디가 없으므로 아래 선언된 DataBean2와 중복됨  -->
+
+	<!-- =========== 생성자를 통한 주입  ============= -->
+	<bean id="obj4" class="kr.co.softsoldesk.beans.TestBean3">
+		<!-- 위에 동일한 객체가 있어서 하나 더 만들면 모호성에 빠짐...그래  -->
+		<constructor-arg ref="data_bean2"/>
+		<constructor-arg ref="data_bean2"/>
+	</bean> 
+	<bean id="data_bean2" class="kr.co.softsoldesk.beans.DataBean2" scope="prototype"/>
+	
+	<!-- =========== 생성자를 통한 자동주입  ============= -->
+	<bean id="obj5" class="kr.co.softsoldesk.beans.TestBean3" autowire="constructor">
+	<!-- TestBean3의 속성 중 DataBean2는  
+		 autowire="constructor" : 어딘가에(=위에 있는 data_bean2를 가져옴) 빈이 선언 되어있어서 자동으로 찾아서 가져옴.  -->
+	</bean>
+	<!-- =========== 생성자를 통한 자동주입 (자료형+객체) ============= -->
+	<bean id="obj6" class="kr.co.softsoldesk.beans.TestBean3" autowire="constructor">
+		<constructor-arg type="int" value="100" index="0"/>
+		<constructor-arg type="java.lang.String" value="목요일" index="1"/>
+	</bean>
+	
+	<!-- =========== default-autowire="byName" ============= -->
+	<!-- beans의 defulat-autowire로 byName 설정해두면 알아서 찾음. -->
+	<bean id="obj8" class="kr.co.softsoldesk.beans.TestBean1"/>
+	
+	<!-- =========== default-autowire="byName 참조하지 않음 " ============= -->
+	<bean id="obj9" class="kr.co.softsoldesk.beans.TestBean1" autowire="no"/>
+	
+	  
+</beans>
